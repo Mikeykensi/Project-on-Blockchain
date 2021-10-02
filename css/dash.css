@@ -1,0 +1,175 @@
+body{
+    display:flex;
+    justify-content:center;
+    height:100%;
+    font-family:"Raleway", sans-serif;
+}
+
+.main{
+  display: block;
+  margin-left: 5%;
+}
+
+.block {
+  margin-top: 2%;
+   display: inline-block;
+   margin-left: 10%;
+}
+
+.ethereum {
+  text-align: center;
+  margin: 8px 0 10px 0;
+  color: #ffa833;
+  float: left;
+  width: 20%;
+}
+
+img.bal {
+  width: 45%;
+  border-radius: 50%;
+}
+
+.voters {
+  text-align: center;
+  margin: 8px 0 10px 0;
+  color: #ffa833;
+  float: left;
+  width: 35%;
+}
+
+img.voter {
+  width: 25%;
+  border-radius: 50%;
+}
+
+.voted {
+  text-align: center;
+  margin: 12px 0 8px 0;
+  color: #ffa833;
+  float: left;
+  width: 35%;
+}
+
+img.nvoted {
+  width: 35%;
+  border-radius: 50%;
+}
+
+.startv{
+  align-content: center;
+  margin: 8px 0 8px 0;
+  margin-left: 10%;
+}
+
+img.start{
+  height: 50%;
+  width: 85%;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 20px 0 10px 0;
+  border: none;
+  cursor: pointer;
+  width: 30%;
+}     
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  padding-bottom: 100px;
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #2f4f4f;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: white;
+  color: white;
+}
+
+input[type=text] {
+  width: 80%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus{
+  background-color: #ddd;
+  outline: none;
+}  
+
+.candid{
+   background-color: #4CAF50;
+   color: white;
+   padding: 14px 20px;
+   margin-left: 2%;
+   margin-top: 2%;
+   margin-bottom: 2%;
+   border: none;
+   cursor: pointer;
+   width: 30%;
+
+}

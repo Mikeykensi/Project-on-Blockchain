@@ -1,0 +1,88 @@
+pragma solidity >=0.4.0 < 0.7.0;
+import "./ownable.sol";
+import "./candidate.sol";
+
+contract Store is Ownable{
+    
+    struct Voter
+    {
+        uint8 id;
+        bool linked;
+        bool voted;
+    }
+    
+    struct Param{
+      uint8 l;
+      uint16 k;
+      uint32 e;
+      uint256 N;
+      uint256 d;
+      uint256 H1;
+    }
+    Param public param;    
+    bool public triggerTally;
+    uint public voternum = 0;
+    uint256 public paillierKey;
+    mapping(address => uint8) public voters;
+    mapping(uint8 => uint256) internal slprivkey;
+    mapping(uint8 => uint256) private slpubkey;
+    mapping(uint8 => Voter) public voterdetail;
+    mapping(uint8 => bool) public verify;
+    
+    
+    //Function to create voter by voters
+    function _createVoter(uint8 _id) public
+    {
+        require(voters[msg.sender] == 0,"Voter already exists");
+        require(triggerTally == false,"Sorry no other votings allowed");
+        voters[msg.sender] = _id;
+        voterdetail[_id] = Voter(_id,false,false);
+        ++voternum;
+    }
+    
+    // get SLRS parameters from the admin(done)
+    function _getSLRSparam(uint16 _k, uint8 _l, uint256 _N, uint32 _e, uint256 _d, uint256 _H1) public onlyOwner
+    {
+        param = Param(_l,_k,_e,_N,_d,_H1);
+    }
+    
+    function _getParams() public view returns(uint16,uint8,uint256,uint32,uint256)
+    {
+        return (param.k, param.l, param.N, param.e, param.H1);
+    }
+    
+    // get Paillier Public Key from admin(done)
+    function _getPailKey(uint256 _key) public onlyOwner
+    {
+        paillierKey = _key;
+    }
+    
+    // generate slrs keys
+    function generateKeys(uint8 votid) public returns(uint256,uint256)
+    {
+        require(voters[msg.sender] == votid,"Invalid Voter!!");
+        uint256 priv = ((param.H1*((votid)*(param.d)))% param.N);
+        uint256 publ = (((priv)*(param.e))% param.N);
+        slprivkey[votid] = priv;
+        slpubkey[votid] = publ;
+        return (priv,publ);
+    }
+    
+    // check public key uploaded by voter
+    function uploadPubkey(uint8 _id, uint256 publick) public
+    {
+        if(slpubkey[_id] == publick)
+        {
+            verify[_id] = true;
+            
+        }
+        else
+        {
+            verify[_id] = false;
+        }
+    }
+    
+    function _triggerTallyPhase() public onlyOwner{
+        triggerTally = true;
+    }
+}

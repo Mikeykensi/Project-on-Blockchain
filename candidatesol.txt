@@ -1,0 +1,69 @@
+pragma solidity >=0.4.0 < 0.7.0;
+import "./ownable.sol";
+import "./generate.sol";
+
+contract Candidate is Store{
+    
+    uint16 public totalcand=0;
+    struct Cand{
+        uint8 id;
+        uint8 votecount;
+        string name;
+        string description;
+        
+    }
+    uint8 public winid;
+    uint16 public voterVoted = 0;
+    mapping(uint8 => Cand) public cands;
+    mapping(uint8 => uint256) public Epsilonval;
+    
+    
+    /// Add candidate by admin(done)
+    function _createCand(uint8 _id, string memory _name, string memory _description) public onlyOwner {
+        cands[_id] = Cand(_id,0,_name,_description);
+        ++totalcand;
+
+    }
+    
+    /// Vote function initiated by voter
+    function _vote(uint8 _idvoter,uint8 _idcand,uint256 votprivate, uint epsilon) public {
+        require(voters[msg.sender] == _idvoter,"You are not a valid voter");
+        require(slprivkey[_idvoter] == votprivate && Epsilonval[_idcand] == epsilon , "You have entered an invalid values");
+        require(voterdetail[_idvoter].linked == false && voterdetail[_idvoter].voted == false, "You have already voted");
+        ++cands[_idcand].votecount;
+        ++voterVoted;
+        voterdetail[_idvoter].linked = true;
+        voterdetail[_idvoter].voted = true;
+    }
+                
+    //epsilon given by admin to SC
+    function _getEpsilon(uint8 _idcand,uint256 epsilon) public onlyOwner
+    {
+        Epsilonval[_idcand] = epsilon;
+    }
+    
+    // get the values for dashboard(done)
+    function _getValues() public view returns(uint16, uint16, uint)
+    {
+        return (totalcand, voterVoted, voternum);
+    }
+    
+    // get results
+    function _getWinner(uint8 _id) public onlyOwner
+    {
+        winid = _id;
+        
+    }
+    
+    //function to display winner
+    function displayWinner() public view returns(uint8, string memory, string memory, uint8)
+    {
+        return (winid, cands[winid].name, cands[winid].description, cands[winid].votecount);
+    }
+    
+        
+}
+    
+    
+    
+    

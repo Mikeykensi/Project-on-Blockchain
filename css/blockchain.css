@@ -1,0 +1,41 @@
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    font-family:"Raleway", sans-serif;
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url('../images/vote.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.block {
+	display: inline-block;
+	margin-left: 20%;
+}
+
+.paillier {
+  text-align: center;
+  margin: 12px 0 12px 0;
+  color: #FFFFFF;
+  float: left;
+  width:25%;
+}
+
+img.generate {
+  width: 100%;
+  border-radius: 70%;
+}
+
+.slrs {
+  text-align: center;
+  margin: 12px 0 12px 0;
+  color: #FFFFFF;
+  float: left;
+  width: 50%;
+}
+
+img.parameter {
+  width: 60%;
+  border-radius: 70%;
+}
